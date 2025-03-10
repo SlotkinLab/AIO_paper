@@ -56,8 +56,8 @@ module load samtools
 ##---------------------------------------------------------------------------------
 sample=\$(sed -n "\${SLURM_ARRAY_TASK_ID}p" "$SAMPLES_FILE")
 
-samtools view -h "$INDIR/\${sample}.unfiltered.mapped.bam" | awk '\$1 ~ /^@/ || (\$3 != "ChrM" && \$3 != "ChrC" && \$3 != "BK059222.1" && \$3 != "BK016277.1"&& \$3 != "Ppat
-ens_mito_AB251495.1"&& \$3 != "Ppatens_chloro_AP005672.2" )' | samtools fasta - > "$OUTDIR/\${sample}.mito_chloroFree.fa"
+samtools view -h "$INDIR/\${sample}.unfiltered.mapped.bam" | awk '\$1 ~ /^@/ || (length(\$10) >= 18 && length(\$10) <= 28 && \$3 != "ChrM" && \$3 != "ChrC" && \$3 != "BK059222.1" && \$3 != "BK016277.1"&& \$3 != "Ppat
+ens_mito_AB251495.1"&& \$3 != "Ppatens_chloro_AP005672.2" )' | samtools fasta - > "$OUTDIR/\${sample}.mito_chloroFree.sizeFiltered.fa"
 EOT
 
 echo "Job file is : $JOBSCRIPT"
