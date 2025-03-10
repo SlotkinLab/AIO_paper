@@ -61,7 +61,7 @@ source activate bowtie
 
 sample=\$(sed -n "\${SLURM_ARRAY_TASK_ID}p" "$SAMPLES_FILE")
 
-bowtie -v 0 -p 4 -fS $INDEX "$INDIR/\${sample}.mito_chloroFree.fa" | samtools fasta -f 4 - >  "$OUTDIR/\${sample}.mito_chloroFree.rRNA_tRNA_free.fasta"
+bowtie -v 0 -p 4 -fS $INDEX "$INDIR/\${sample}.unfiltered.mapped.mito_chloroFree.sizeFilt.fa" | samtools fasta -f 4 - >  "$OUTDIR/\${sample}.filtered.rRNA_tRNA_free.fasta"
 
 EOT
 
